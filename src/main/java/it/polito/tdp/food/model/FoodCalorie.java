@@ -1,16 +1,8 @@
 package it.polito.tdp.food.model;
 
-public class FoodCalorie implements Comparable<FoodCalorie> {
-
+public class FoodCalorie implements Comparable<FoodCalorie>{
 	private Food food;
 	private double calorie;
-	
-	
-	public FoodCalorie(Food food, double calorie) {
-		super();
-		this.food = food;
-		this.calorie = calorie;
-	}
 	public Food getFood() {
 		return food;
 	}
@@ -23,14 +15,19 @@ public class FoodCalorie implements Comparable<FoodCalorie> {
 	public void setCalorie(double calorie) {
 		this.calorie = calorie;
 	}
+	public FoodCalorie(Food food, double calorie) {
+		super();
+		this.food = food;
+		this.calorie = calorie;
+	}
 	@Override
 	public int compareTo(FoodCalorie o) {
-
-		return -Double.compare(calorie, o.calorie);
+		// TODO Auto-generated method stub
+		return -Double.compare(this.calorie, o.calorie);
 	}
 	@Override
 	public String toString() {
-		return  food.toString() + " calorie: " + calorie;
+		return  food + ", calorie=" + calorie;
 	}
 	
 	

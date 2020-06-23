@@ -74,7 +74,7 @@ public class FoodController {
     	txtResult.clear();
     	Food food= this.boxFood.getValue();
     	if(food==null) {
-    		txtResult.appendText("Devi selezionare un cibo");
+    		txtResult.appendText("Devi selezionare");
     		return;
     	}
     	List<FoodCalorie> result= this.model.getAdiacenti(food);
@@ -101,10 +101,7 @@ public class FoodController {
     	}
     	int k= Integer.parseInt(input);
     	Food food= this.boxFood.getValue();
-    	if(food==null) {
-    		txtResult.appendText("Devi selezionare un cibo");
-    		return;
-    	}
+    	
     	this.model.runSimulator(k, food);
     	txtResult.appendText("Piatti completati: "+this.model.getCompletati()+" tempo impiegato: "+this.model.getTemo());
     }

@@ -1,18 +1,10 @@
 package it.polito.tdp.food.model;
 
 public class Adiacenza {
-	private Food f1;
-	private Food f2;
-	private double peso;
-	
-	
-	
-	public Adiacenza(Food f1, Food f2, double peso) {
-		super();
-		this.f1 = f1;
-		this.f2 = f2;
-		this.peso = peso;
-	}
+
+	Food f1;
+	Food f2;
+	double peso;
 	public Food getF1() {
 		return f1;
 	}
@@ -31,7 +23,12 @@ public class Adiacenza {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+	public Adiacenza(Food f1, Food f2, double peso) {
+		super();
+		this.f1 = f1;
+		this.f2 = f2;
+		this.peso = peso;
+	}
 	
 	
-
 }
