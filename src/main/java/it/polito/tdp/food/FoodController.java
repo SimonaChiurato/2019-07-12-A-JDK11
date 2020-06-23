@@ -5,8 +5,11 @@
 package it.polito.tdp.food;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.food.model.Food;
+import it.polito.tdp.food.model.FoodCalorie;
 import it.polito.tdp.food.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,7 +44,7 @@ public class FoodController {
     private Button btnSimula; // Value injected by FXMLLoader
 
     @FXML // fx:id="boxFood"
-    private ComboBox<?> boxFood; // Value injected by FXMLLoader
+    private ComboBox<Food> boxFood; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtResult"
     private TextArea txtResult; // Value injected by FXMLLoader
@@ -59,13 +62,25 @@ public class FoodController {
     	this.model.creaGrafo(x);
     	
     	txtResult.appendText("Arco creato con # vertici: "+this.model.vertici().size()+" # achi: "+this.model.archi().size()+"\n");
+    this.boxFood.getItems().addAll(this.model.vertici());
     }
     
     @FXML
     void doCalorie(ActionEvent event) {
     	txtResult.clear();
-    	
-    	txtResult.appendText("Analisi calorie...");
+    	Food food= this.boxFood.getValue();
+    	List<FoodCalorie> result= this.model.getAdiacenti(food);
+    	txtResult.appendText("I vicini di "+food+":\n");
+    	if(result.size()>5) {
+    	for(int i=0; i<5; i++) {
+    		txtResult.appendText(result.get(i).toString()+"\n");	
+    	}
+    	}else {
+    		for(FoodCalorie c: result) {
+    			txtResult.appendText(c.toString()+"\n");	
+    		}
+    	}
+    
     }
 
     @FXML

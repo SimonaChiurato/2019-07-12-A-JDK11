@@ -1,6 +1,9 @@
 package it.polito.tdp.food.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,4 +43,14 @@ public class Model {
 	 return this.grafo.edgeSet();
 	}
 
+	public List<FoodCalorie> getAdiacenti(Food food){
+		List<FoodCalorie> result= new ArrayList<>();
+		for(Food f: Graphs.neighborListOf(grafo, food)) {
+			result.add(new FoodCalorie(f,grafo.getEdgeWeight(grafo.getEdge(food, f))));
+
+		}
+		Collections.sort(result);
+	
+		return result;
+	}
 }
