@@ -46,6 +46,7 @@ public class Model {
 
 	public List<FoodCalorie> getAdiacenti(Food food){
 		List<FoodCalorie> result= new ArrayList<>();
+		
 		for(Food f: Graphs.neighborListOf(grafo, food)) {
 			result.add(new FoodCalorie(f,grafo.getEdgeWeight(grafo.getEdge(food, f))));
 
@@ -55,7 +56,7 @@ public class Model {
 		return result;
 	}
 	public void runSimulator(int k, Food food) {
-		sim= new Simulator(k, grafo, food);
+		sim= new Simulator(k, grafo, food, this);
 		sim.run();
 	}
 	public int getCompletati() {

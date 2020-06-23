@@ -23,22 +23,25 @@ public class Simulator {
 	int completati;
 	double tempo;
 
-	public Simulator(int k, SimpleWeightedGraph<Food, DefaultWeightedEdge> grafo, Food food) {
+	public Simulator(int k, SimpleWeightedGraph<Food, DefaultWeightedEdge> grafo, Food food, Model model) {
 		this.k = k;
 		this.grafo = grafo;
 		this.iniziale = food;
-		this.model = new Model();
+		this.model =model;
 		queue = new PriorityQueue<Event>();
 		this.stazioni = new ArrayList<>();
 		this.preparati = new ArrayList<>();
 		tempo = 0.0;
 		completati = 0;
+		
 
 	}
 
 	public void run() {
 		this.queue.clear();
-		List<FoodCalorie> vicini = this.model.getAdiacenti(iniziale);
+
+		List<FoodCalorie> vicini = new ArrayList<>(this.model.getAdiacenti(iniziale));
+				
 		for (int i = 0; i < k && i < vicini.size(); i++) {
 			stazioni.add(i);
 			queue.add(
@@ -58,6 +61,7 @@ public class Simulator {
 				preparati.add(e.getFood());
 				this.completati++;
 				this.tempo=e.getDurata();
+				System.out.println(tempo+" "+e.getFood());
 				queue.add(new Event(e.getDurata(),EventType.INIZIO,e.getFood(),e.getStazione()));
 			}
 			
@@ -67,7 +71,7 @@ public class Simulator {
 		      List<FoodCalorie> vicini = this.model.getAdiacenti(e.getFood());
 				FoodCalorie prossimo = null;
 				for (FoodCalorie f : vicini) {
-					if (!preparati.contains(f)) {
+					if (!preparati.contains(f.getFood())) {
 						prossimo = f;
 						break;
 					}
