@@ -18,6 +18,7 @@ public class Model {
 	SimpleWeightedGraph<Food, DefaultWeightedEdge> grafo;
 	Map<Integer,Food> idMap;
 	FoodDao dao;
+	Simulator sim;
 	
 	public Model() {
 		this.dao=new FoodDao();
@@ -52,5 +53,16 @@ public class Model {
 		Collections.sort(result);
 	
 		return result;
+	}
+	public void runSimulator(int k, Food food) {
+		sim= new Simulator(k, grafo, food);
+		sim.run();
+	}
+	public int getCompletati() {
+		return this.sim.getCompletati();
+	}
+
+	public double getTemo() {
+		return this.sim.getTempo();
 	}
 }

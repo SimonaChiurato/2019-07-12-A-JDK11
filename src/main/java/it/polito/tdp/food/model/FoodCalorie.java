@@ -26,7 +26,7 @@ public class FoodCalorie implements Comparable<FoodCalorie> {
 	@Override
 	public int compareTo(FoodCalorie o) {
 
-		return Double.compare(calorie, o.calorie);
+		return -Double.compare(calorie, o.calorie);
 	}
 	@Override
 	public String toString() {

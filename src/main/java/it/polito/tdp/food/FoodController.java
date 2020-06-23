@@ -5,6 +5,8 @@
 package it.polito.tdp.food;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -62,7 +64,9 @@ public class FoodController {
     	this.model.creaGrafo(x);
     	
     	txtResult.appendText("Arco creato con # vertici: "+this.model.vertici().size()+" # achi: "+this.model.archi().size()+"\n");
-    this.boxFood.getItems().addAll(this.model.vertici());
+  List<Food> vertici= new ArrayList<>(this.model.vertici());
+  Collections.sort(vertici);
+    	this.boxFood.getItems().addAll(vertici);
     }
     
     @FXML
@@ -86,7 +90,15 @@ public class FoodController {
     @FXML
     void doSimula(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Simulazione...");
+      	String input= this.txtK.getText();
+    	if(!input.matches("[0-9]+")) {
+    		txtResult.appendText("Devi inserire un valore numerico intero");
+    		return;
+    	}
+    	int k= Integer.parseInt(input);
+    	Food food= this.boxFood.getValue();
+    	this.model.runSimulator(k, food);
+    	txtResult.appendText("Piatti completati: "+this.model.getCompletati()+" tempo impiegato: "+this.model.getTemo());
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
