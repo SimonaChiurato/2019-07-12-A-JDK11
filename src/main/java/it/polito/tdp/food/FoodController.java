@@ -49,12 +49,22 @@ public class FoodController {
     @FXML
     void doCreaGrafo(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Creazione grafo...");
+    	this.boxFood.getItems().remove(0, this.boxFood.getItems().size()-1);
+    	String input= this.txtPorzioni.getText();
+    	if(!input.matches("[0-9]+")) {
+    		txtResult.appendText("Devi inserire un valore numerico intero");
+    		return;
+    	}
+    	int x= Integer.parseInt(input);
+    	this.model.creaGrafo(x);
+    	
+    	txtResult.appendText("Arco creato con # vertici: "+this.model.vertici().size()+" # achi: "+this.model.archi().size()+"\n");
     }
     
     @FXML
     void doCalorie(ActionEvent event) {
     	txtResult.clear();
+    	
     	txtResult.appendText("Analisi calorie...");
     }
 
