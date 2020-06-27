@@ -46,6 +46,7 @@ public class Simulator {
 			stazioni.add(i);
 			queue.add(
 					new Event(vicini.get(i).getCalorie(), EventType.FINE, vicini.get(i).getFood(), stazioni.get(i)));
+			vicini.get(i).getFood().setInCorso(true);
 		}
 
 		while (!this.queue.isEmpty()) {
@@ -61,7 +62,7 @@ public class Simulator {
 				preparati.add(e.getFood());
 				this.completati++;
 				this.tempo=e.getDurata();
-				System.out.println(tempo+" "+e.getFood()+ e.getStazione());
+			
 				queue.add(new Event(e.getDurata(),EventType.INIZIO,e.getFood(),e.getStazione()));
 			}
 			
@@ -71,15 +72,16 @@ public class Simulator {
 		      List<FoodCalorie> vicini = this.model.getAdiacenti(e.getFood());
 				FoodCalorie prossimo = null;
 				for (FoodCalorie f : vicini) {
-					System.out.println(e.getFood()+"---->"+f);
 					
-					if (!preparati.contains(f.getFood())) {
+					
+					if (f.getFood().getInCorso()==false) {
 						prossimo = f;
 						break;
 					}
 				}
 
 				if(prossimo!=null) {
+					prossimo.getFood().setInCorso(true);
 					queue.add(new Event(e.getDurata()+prossimo.getCalorie(),EventType.FINE,prossimo.getFood(),e.getStazione()));
 				}
 				break;

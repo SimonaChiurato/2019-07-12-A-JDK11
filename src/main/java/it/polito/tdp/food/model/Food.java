@@ -1,13 +1,18 @@
 package it.polito.tdp.food.model;
 
 public class Food implements Comparable<Food> {
+	enum EventType{
+		IN_CORSO
+	}
 	private Integer food_code;
 	private String display_name;
+	boolean inCorso=false;
 	
 	public Food(Integer food_code, String display_name) {
 		super();
 		this.food_code = food_code;
 		this.display_name = display_name;
+		
 	}
 	
 	public Integer getFood_code() {
@@ -57,6 +62,15 @@ public class Food implements Comparable<Food> {
 	public int compareTo(Food o) {
 		// TODO Auto-generated method stub
 		return this.display_name.compareTo(o.display_name);
+	}
+
+	public boolean getInCorso() {
+		// TODO Auto-generated method stub
+		return this.inCorso;
+	}
+
+	public void setInCorso(boolean inCorso) {
+		this.inCorso = inCorso;
 	}
 
 	
