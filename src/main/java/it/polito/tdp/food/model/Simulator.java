@@ -61,7 +61,7 @@ public class Simulator {
 				preparati.add(e.getFood());
 				this.completati++;
 				this.tempo=e.getDurata();
-				System.out.println(tempo+" "+e.getFood());
+				System.out.println(tempo+" "+e.getFood()+ e.getStazione());
 				queue.add(new Event(e.getDurata(),EventType.INIZIO,e.getFood(),e.getStazione()));
 			}
 			
@@ -71,6 +71,8 @@ public class Simulator {
 		      List<FoodCalorie> vicini = this.model.getAdiacenti(e.getFood());
 				FoodCalorie prossimo = null;
 				for (FoodCalorie f : vicini) {
+					System.out.println(e.getFood()+"---->"+f);
+					
 					if (!preparati.contains(f.getFood())) {
 						prossimo = f;
 						break;
